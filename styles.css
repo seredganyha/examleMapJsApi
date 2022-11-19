@@ -1,0 +1,11 @@
+.card-title {
+    font-size: 20px;
+}
+.card-date {
+    margin: 27px 0 8px 0;
+}
+.card-description {
+    font-size: 12px;
+    color: #7A7474;
+    margin: 27px 0 40px 0;
+}
