@@ -96,7 +96,7 @@ function init(){
         center: [59.90, 30.32],
         zoom: 7
     });
-    openBalloon();
+    initBalloon();
 }
 
 function getBalloonHtmlTemplate(params) {
@@ -129,6 +129,8 @@ function getBalloonHtmlTemplate(params) {
 
 function initBalloon() {
 
+    getLocation();
+
     const geoData = mockBackendRequest.map(data => {
        return new ymaps.Placemark(data.place_address_coordinates, {
             balloonContentBody: getBalloonHtmlTemplate(data)
@@ -141,6 +143,16 @@ function initBalloon() {
         });
         myMap.geoObjects.add(geo);
     })
+}
+
+async function getLocation() {
+    try {
+        const location = await ymaps.geolocation.get();
+        myMap.geoObjects.add(location.geoObjects)
+    }
+    catch (err) {
+       console.log(err);
+    }
 }
 
 ymaps.ready(init);
